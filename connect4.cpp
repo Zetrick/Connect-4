@@ -25,8 +25,6 @@ enum Turn
     BEGINNING = 2,
 };
 
-bool winner = false;
-
 struct slot
 {
     bool hasX = false;
