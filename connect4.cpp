@@ -126,21 +126,19 @@ bool updateBoard(gameBoard * theBoard, int columnSelection, Turn playerTurn)
     if(columnSelection < 1 || columnSelection > theBoard->width) return false;
     
     --columnSelection; // for cleanliness in the loops (avoiding the constant -1)
-    bool placedToken = false;
     
     //Start with lowest tile in the selected column and check up for occupied spaces
     for(int i = theBoard->height-1; i >= 0; --i)
     {
         //If the space is not taken, then take it!
-        if(!theBoard->gameBoard[i][columnSelection].hasX && !theBoard->gameBoard[i][columnSelection].hasO && !placedToken)
+        if(!theBoard->gameBoard[i][columnSelection].hasX && !theBoard->gameBoard[i][columnSelection].hasO)
         {
-            if(playerTurn == PLAYER_1) theBoard->gameBoard[i][columnSelection].hasX = true;
-            if(playerTurn == PLAYER_2) theBoard->gameBoard[i][columnSelection].hasO = true;
-            placedToken = true;
+            if(playerTurn == PLAYER_1) { theBoard->gameBoard[i][columnSelection].hasX = true; return true; }
+            if(playerTurn == PLAYER_2) { theBoard->gameBoard[i][columnSelection].hasO = true; return true; }
         }
     }
     //If this returns, that means there was no valid move to be found. Ask the player to enter another column
-    return placedToken;
+    return false;
 }
 
 void takeTurn(gameBoard * theBoard, Turn & playerTurn)
