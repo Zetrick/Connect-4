@@ -3,9 +3,6 @@
 //  Copyright (c) 2015 Zetrick. All rights reserved.
 //
 
-#include <string>
-#include <ctime>
-#include <cstdlib>
 #include <iostream>
 
 const char xMarker = 'X';
