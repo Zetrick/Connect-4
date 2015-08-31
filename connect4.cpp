@@ -32,53 +32,61 @@ struct gameBoard
     int width = 0;
 };
 
-bool checkForWin(gameBoard theBoard)
+bool checkForWin(gameBoard * theBoard)
 {
     //Start checking horizontally for a win
-    for(int i = 0; i < theBoard.height; ++i)
+    for(int i = 0; i < theBoard->height; ++i)
     {
-        for(int j = 0; j < theBoard.width - 3; ++j)
+        for(int j = 0; j < theBoard->width - 3; ++j)
         {
-            if (theBoard.gameBoard[i][j].hasX && theBoard.gameBoard[i][j+1].hasX && theBoard.gameBoard[i][j+2].hasX && theBoard.gameBoard[i][j+3].hasX)
+            if (theBoard->gameBoard[i][j].hasX && theBoard->gameBoard[i][j+1].hasX
+                && theBoard->gameBoard[i][j+2].hasX && theBoard->gameBoard[i][j+3].hasX)
                 return true;
-            if (theBoard.gameBoard[i][j].hasO && theBoard.gameBoard[i][j+1].hasO && theBoard.gameBoard[i][j+2].hasO && theBoard.gameBoard[i][j+3].hasO)
+            if (theBoard->gameBoard[i][j].hasO && theBoard->gameBoard[i][j+1].hasO
+                && theBoard->gameBoard[i][j+2].hasO && theBoard->gameBoard[i][j+3].hasO)
                 return true;
         }
     }
     
     //Check vertically
-    for(int i = 0; i < theBoard.height - 3; ++i)
+    for(int i = 0; i < theBoard->height - 3; ++i)
     {
-        for(int j = 0; j < theBoard.width; ++j)
+        for(int j = 0; j < theBoard->width; ++j)
         {
-            if (theBoard.gameBoard[i][j].hasX && theBoard.gameBoard[i+1][j].hasX && theBoard.gameBoard[i+2][j].hasX && theBoard.gameBoard[i+3][j].hasX)
+            if (theBoard->gameBoard[i][j].hasX && theBoard->gameBoard[i+1][j].hasX
+                && theBoard->gameBoard[i+2][j].hasX && theBoard->gameBoard[i+3][j].hasX)
                 return true;
-            if (theBoard.gameBoard[i][j].hasO && theBoard.gameBoard[i+1][j].hasO && theBoard.gameBoard[i+2][j].hasO && theBoard.gameBoard[i+3][j].hasO)
+            if (theBoard->gameBoard[i][j].hasO && theBoard->gameBoard[i+1][j].hasO
+                && theBoard->gameBoard[i+2][j].hasO && theBoard->gameBoard[i+3][j].hasO)
                 return true;
             
         }
     }
     
     //Check diagonal SE
-    for(int i = 0; i < theBoard.height - 3; ++i)
+    for(int i = 0; i < theBoard->height - 3; ++i)
     {
-        for(int j = 0; j < theBoard.width - 3; ++j)
+        for(int j = 0; j < theBoard->width - 3; ++j)
         {
-            if (theBoard.gameBoard[i][j].hasX && theBoard.gameBoard[i+1][j+1].hasX && theBoard.gameBoard[i+2][j+2].hasX && theBoard.gameBoard[i+3][j+3].hasX)
+            if (theBoard->gameBoard[i][j].hasX && theBoard->gameBoard[i+1][j+1].hasX
+                && theBoard->gameBoard[i+2][j+2].hasX && theBoard->gameBoard[i+3][j+3].hasX)
                 return true;
-            if (theBoard.gameBoard[i][j].hasO && theBoard.gameBoard[i+1][j+1].hasO && theBoard.gameBoard[i+2][j+2].hasO && theBoard.gameBoard[i+3][j+3].hasO)
+            if (theBoard->gameBoard[i][j].hasO && theBoard->gameBoard[i+1][j+1].hasO
+                && theBoard->gameBoard[i+2][j+2].hasO && theBoard->gameBoard[i+3][j+3].hasO)
                 return true;
         }
     }
     
     //Check diagonal SW
-    for(int i = 0; i < theBoard.height - 3; ++i)
+    for(int i = 0; i < theBoard->height - 3; ++i)
     {
-        for(int j = 0; j < theBoard.width - 3; ++j)
+        for(int j = 0; j < theBoard->width - 3; ++j)
         {
-            if (theBoard.gameBoard[i][j+3].hasX && theBoard.gameBoard[i+1][j+2].hasX && theBoard.gameBoard[i+2][j+1].hasX && theBoard.gameBoard[i+3][j].hasX)
+            if (theBoard->gameBoard[i][j+3].hasX && theBoard->gameBoard[i+1][j+2].hasX
+                && theBoard->gameBoard[i+2][j+1].hasX && theBoard->gameBoard[i+3][j].hasX)
                 return true;
-            if (theBoard.gameBoard[i][j+3].hasO && theBoard.gameBoard[i+1][j+2].hasO && theBoard.gameBoard[i+2][j+1].hasO && theBoard.gameBoard[i+3][j].hasO)
+            if (theBoard->gameBoard[i][j+3].hasO && theBoard->gameBoard[i+1][j+2].hasO
+                && theBoard->gameBoard[i+2][j+1].hasO && theBoard->gameBoard[i+3][j].hasO)
                 return true;
         }
     }
@@ -86,51 +94,51 @@ bool checkForWin(gameBoard theBoard)
 }
 
 //Creates the game board and returns it
-gameBoard makeGameBoard(gameBoard theBoard)
+gameBoard * makeGameBoard(gameBoard * theBoard)
 {
-    theBoard.gameBoard = new slot * [theBoard.height];
-    for(int i = 0; i < theBoard.height; ++i)
-        theBoard.gameBoard[i] = new slot [theBoard.width];
+    theBoard->gameBoard = new slot * [theBoard->height];
+    for(int i = 0; i < theBoard->height; ++i)
+        theBoard->gameBoard[i] = new slot [theBoard->width];
     
     return theBoard;
 }
 
-void printBoard(gameBoard theBoard)
+void printBoard(gameBoard * theBoard)
 {
     std::cout << "\n\n\n\n\n\n\n\n";
-    for(int i = 0; i < theBoard.height; ++i)
+    for(int i = 0; i < theBoard->height; ++i)
     {
         std::cout << "\t\t\t\t\t\t|";
-        for(int j = 0; j < theBoard.width; ++j)
+        for(int j = 0; j < theBoard->width; ++j)
         {
-            if(theBoard.gameBoard[i][j].hasX) std::cout << xMarker << "|";
-            else if(theBoard.gameBoard[i][j].hasO) std::cout << oMarker << "|";
+            if(theBoard->gameBoard[i][j].hasX) std::cout << xMarker << "|";
+            else if(theBoard->gameBoard[i][j].hasO) std::cout << oMarker << "|";
             else std::cout << blankTile << "|";
         }
         std::cout << std::endl;
     }
     std::cout << "\t\t\t\t\t\t ";
-    for(int i = 0; i < theBoard.width; ++i)
+    for(int i = 0; i < theBoard->width; ++i)
         std::cout << i+1 << " ";
     std::cout << std::endl << std::endl;
     
 }
 
-bool updateBoard(gameBoard theBoard, int columnSelection, Turn playerTurn)
+bool updateBoard(gameBoard * theBoard, int columnSelection, Turn playerTurn)
 {
-    if(columnSelection < 1 || columnSelection > theBoard.width) return false;
+    if(columnSelection < 1 || columnSelection > theBoard->width) return false;
     
     --columnSelection; // for cleanliness in the loops (avoiding the constant -1)
     bool placedToken = false;
     
     //Start with lowest tile in the selected column and check up for occupied spaces
-    for(int i = theBoard.height-1; i >= 0; --i)
+    for(int i = theBoard->height-1; i >= 0; --i)
     {
         //If the space is not taken, then take it!
-        if(!theBoard.gameBoard[i][columnSelection].hasX && !theBoard.gameBoard[i][columnSelection].hasO && !placedToken)
+        if(!theBoard->gameBoard[i][columnSelection].hasX && !theBoard->gameBoard[i][columnSelection].hasO && !placedToken)
         {
-            if(playerTurn == PLAYER_1) theBoard.gameBoard[i][columnSelection].hasX = true;
-            if(playerTurn == PLAYER_2) theBoard.gameBoard[i][columnSelection].hasO = true;
+            if(playerTurn == PLAYER_1) theBoard->gameBoard[i][columnSelection].hasX = true;
+            if(playerTurn == PLAYER_2) theBoard->gameBoard[i][columnSelection].hasO = true;
             placedToken = true;
         }
     }
@@ -138,7 +146,7 @@ bool updateBoard(gameBoard theBoard, int columnSelection, Turn playerTurn)
     return placedToken;
 }
 
-void takeTurn(gameBoard theBoard, Turn & playerTurn)
+void takeTurn(gameBoard * theBoard, Turn & playerTurn)
 {
     //switch whos turn it is
     if(playerTurn == PLAYER_1)
@@ -161,19 +169,19 @@ void takeTurn(gameBoard theBoard, Turn & playerTurn)
 
 int main()
 {
-    gameBoard theBoard;
+    gameBoard * theBoard;
     Turn whosTurn = BEGINNING;
     
     std::cout << "Standard height is 6. Standard width is 7.\n";
-    while(theBoard.height < 4)
+    while(theBoard->height < 4)
     {
         std::cout << "Please select a height(minimum: 4) for the Connect Four board: ";
-        std::cin >> theBoard.height;
+        std::cin >> theBoard->height;
     }
-    while(theBoard.width < 4)
+    while(theBoard->width < 4)
     {
         std::cout << "Please select a width(minimum: 4) for the Connect Four board: ";
-        std::cin >> theBoard.width;
+        std::cin >> theBoard->width;
     }
     
     //Make a new game board with specified width and height
@@ -190,7 +198,7 @@ int main()
         std::cout << "\n\nPlayer 1 wins!";
     else std::cout << "\n\nPlayer 2 wins!";
     
-    for(int i = 0; i < theBoard.height; ++i)
-        delete [] theBoard.gameBoard[i];
-    delete theBoard.gameBoard;
+    for(int i = 0; i < theBoard->height; ++i)
+        delete [] theBoard->gameBoard[i];
+    delete theBoard->gameBoard;
 }
