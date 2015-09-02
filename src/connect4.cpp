@@ -4,30 +4,11 @@
 //
 
 #include <iostream>
+#include <connect4.h>
 
 const char xMarker = 'X';
 const char oMarker = 'O';
 const char blankTile = '_';
-
-enum Turn
-{
-    PLAYER_1,
-    PLAYER_2,
-    BEGINNING,
-};
-
-struct slot
-{
-    bool hasX = false;
-    bool hasO = false;
-};
-
-struct gameBoard
-{
-    slot ** gameBoard = NULL;
-    int height = 0;
-    int width = 0;
-};
 
 bool checkForWin(gameBoard * theBoard)
 {
@@ -160,40 +141,4 @@ void takeTurn(gameBoard * theBoard, Turn & playerTurn)
         std::cin >> columnSelection;
         validMove = updateBoard(theBoard, columnSelection, playerTurn);
     }
-}
-
-int main()
-{
-    gameBoard * theBoard;
-    Turn whosTurn = BEGINNING;
-    
-    std::cout << "Standard height is 6. Standard width is 7.\n";
-    while(theBoard->height < 4)
-    {
-        std::cout << "Please select a height(minimum: 4) for the Connect Four board: ";
-        std::cin >> theBoard->height;
-    }
-    while(theBoard->width < 4)
-    {
-        std::cout << "Please select a width(minimum: 4) for the Connect Four board: ";
-        std::cin >> theBoard->width;
-    }
-    
-    //Make a new game board with specified width and height
-    theBoard = makeGameBoard(theBoard);
-    
-    while( !checkForWin(theBoard) )
-    {
-        takeTurn(theBoard, whosTurn);
-    }
-    
-    printBoard(theBoard);
-    
-    if(whosTurn == PLAYER_1)
-        std::cout << "\n\nPlayer 1 wins!";
-    else std::cout << "\n\nPlayer 2 wins!";
-    
-    for(int i = 0; i < theBoard->height; ++i)
-        delete [] theBoard->gameBoard[i];
-    delete theBoard->gameBoard;
 }
