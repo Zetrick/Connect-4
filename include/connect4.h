@@ -4,7 +4,7 @@
 //  Connect 4
 //  Created by Zachary Hetrick on 8/27/15.
 //  Copyright (c) 2015 Zetrick. All rights reserved.
-//
+//added this comment
 #include <iostream>
 
 enum Turn
