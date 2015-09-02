@@ -3,7 +3,7 @@ This doesn't include very robust input verification.
 
 I moved stuff around to mimick the way most projects I have seen organized. Its not the only way to do it but after messing around with a few different ways to do it this is my favorite..
 
-Stuff are uploaded to github
+So below is the stuff that would get committed and shared with git
 
 CMakeLists.txt - this is a special file which tells "CMake" (you can google and download cmake if you want) how to generate make files for whatever operating system is being used. On linux it makes regular make files, on windows it usually generates a visual studio project, and on mac I think it can generate an xcode project. This is really nice cause only one file is needed to build the project on any operating system.
 
