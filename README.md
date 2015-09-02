@@ -31,8 +31,11 @@ Debug build has extra debug information embedded in the exe so that you can step
 I usually (and a lot of other people) append "d" to everything that has debug symbols and I seperate x86 and x64 in different folders. So if I have some program example.exe (say its windows), my bin folder would look like
 
 /bin/x64/example.exe
+
 /bin/x64/exampled.exe
+
 /bin/x86/example.exe
+
 /bin/x86/exampled.exe
 
 Whew.. Okay.. I have no idea how much of this stuff you already are familiar with I just know its kind of the drudge work of programming and took me forever to figure out a good organization for my projects that would work on all platforms.
